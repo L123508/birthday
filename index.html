@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生日快乐！</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      font-family: 'Microsoft YaHei', sans-serif;
+    }
+
+    h1 {
+      color: #fff;
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .image-container {
+      width: 100%;
+      max-width: 400px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .image-wrapper {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .image-wrapper img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .nav-buttons {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 15px;
+    }
+
+    .nav-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255, 255, 255, 0.8);
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s;
+    }
+
+    .nav-btn:hover {
+      background: #fff;
+    }
+
+    .dots {
+      position: absolute;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .dot.active {
+      background: #fff;
+    }
+
+    .link-container {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .birthday-link {
+      display: inline-block;
+      padding: 12px 30px;
+      background: #fff;
+      color: #ff6b9d;
+      text-decoration: none;
+      border-radius: 30px;
+      font-size: 16px;
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .birthday-link:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .message {
+      color: #fff;
+      font-size: 1.2rem;
+      margin-top: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>🎂 生日快乐！🎂</h1>
+
+  <div class="image-container">
+    <div class="image-wrapper">
+      <img src="屏幕截图 2026-05-07 204658.png" alt="生日图片1">
+      <img src="屏幕截图 2026-05-07 233222.png" alt="生日图片2">
+    </div>
+
+    <div class="nav-buttons">
+      <button class="nav-btn" onclick="prevImage()">←</button>
+      <button class="nav-btn" onclick="nextImage()">→</button>
+    </div>
+
+    <div class="dots">
+      <span class="dot active" onclick="goToImage(0)"></span>
+      <span class="dot" onclick="goToImage(1)"></span>
+    </div>
+  </div>
+
+  <div class="link-container">
+    <a href="https://v.douyin.com/6ac9ZMC8EKI/" class="birthday-link" target="_blank">🎉 点击这里可查看礼物本体 🎉</a>
+  </div>
+
+  <p class="message">祝你天天开心，中考成绩节节高升！</p>
+
+  <script>
+    const imageWrapper = document.querySelector('.image-wrapper');
+    const dots = document.querySelectorAll('.dot');
+    let currentIndex = 0;
+    const totalImages = 2;
+
+    function updateImage() {
+      imageWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentIndex);
+      });
+    }
+
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % totalImages;
+      updateImage();
+    }
+
+    function prevImage() {
+      currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+      updateImage();
+    }
+
+    function goToImage(index) {
+      currentIndex = index;
+      updateImage();
+    }
+
+    // 自动轮播
+    setInterval(nextImage, 3000);
+  </script>
+</body>
+
+</html>
